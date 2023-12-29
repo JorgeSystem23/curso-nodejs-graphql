@@ -1,7 +1,15 @@
 type Query {
   hello: String
   getPerson(name: String!, age: Int!): String!
-  getProduct: Product
+  #products
+  product(id: ID!): Product
+  products: [Product!]!
+}
+
+type Mutation {
+  addProduct(input: createProductInput!): Product
+  updateProduct(id: ID!, input: updateProductInput!): Product!
+  deleteProduct(id: ID!): ID
 }
 
 type Product {
@@ -11,4 +19,20 @@ type Product {
   description: String!
   urlImage: String!
   createdAt: String!
+}
+
+input createProductInput {
+  name: String!
+  price: Int!
+  description: String!
+  image: String!
+  categoryId: ID!
+}
+
+input updateProductInput {
+  name: String
+  price: Int
+  description: String
+  image: String
+  categoryId: ID
 }
