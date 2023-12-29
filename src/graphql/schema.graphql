@@ -19,6 +19,14 @@ type Product {
   description: String!
   urlImage: String!
   createdAt: String!
+  categoryId: ID!
+  category: Category!
+}
+
+type Category {
+  id: ID!
+  name: String!
+  urlImage: String!
 }
 
 input createProductInput {
