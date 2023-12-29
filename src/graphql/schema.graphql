@@ -1,0 +1,14 @@
+type Query {
+  hello: String
+  getPerson(name: String!, age: Int!): String!
+  getProduct: Product
+}
+
+type Product {
+  id: ID!
+  name: String!
+  price: Float!
+  description: String!
+  urlImage: String!
+  createdAt: String!
+}
