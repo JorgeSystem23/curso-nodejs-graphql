@@ -11,7 +11,7 @@ type Mutation {
   addProduct(input: createProductInput!): Product
   updateProduct(id: ID!, input: updateProductInput!): Product!
   deleteProduct(id: ID!): ID
-  addCategory(): Category
+  addCategory(input: createCategoryInput): Category
 }
 
 type Product {
@@ -59,8 +59,7 @@ type User {
   createdAt: String!
 }
 
-input createCategory {
-  name: String
-  image: String
-  categoryId: ID
+input createCategoryInput {
+  name: String!
+  image: String!
 }
