@@ -7,9 +7,11 @@ type Query {
 }
 
 type Mutation {
+  login(email: String!, password: String!): AuthResponse
   addProduct(input: createProductInput!): Product
   updateProduct(id: ID!, input: updateProductInput!): Product!
   deleteProduct(id: ID!): ID
+  addCategory(): Category
 }
 
 type Product {
@@ -41,6 +43,24 @@ input updateProductInput {
   name: String
   price: Int
   description: String
+  image: String
+  categoryId: ID
+}
+
+type AuthResponse {
+  access_token: String!
+  user: User!
+}
+
+type User {
+  id: ID!
+  email: String!
+  role: String!
+  createdAt: String!
+}
+
+input createCategory {
+  name: String
   image: String
   categoryId: ID
 }
