@@ -1,14 +1,13 @@
-const { Op } = require('sequelize');
-const boom = require('@hapi/boom');
+const { Op } = require("sequelize");
+const boom = require("@hapi/boom");
 
-const { models } = require('../db/sequelize');
+const { models } = require("../db/sequelize");
 
 class ProductsService {
-
   async create(data) {
     const category = await models.Category.findByPk(data.categoryId);
     if (!category) {
-      throw boom.notFound('category not found');
+      throw boom.notFound("category not found");
     }
     const newProduct = await models.Product.create(data);
     return newProduct;
@@ -16,13 +15,13 @@ class ProductsService {
 
   async find(query) {
     const options = {
-      include: ['category'],
-      where: {}
-    }
+      include: ["category"],
+      where: {},
+    };
     const { limit, offset } = query;
     if (limit && offset) {
-      options.limit =  limit;
-      options.offset =  offset;
+      options.limit = limit;
+      options.offset = offset;
     }
 
     const { price } = query;
@@ -43,10 +42,10 @@ class ProductsService {
 
   async findOne(id) {
     const product = await models.Product.findByPk(id, {
-      include: ['category']
+      include: ["category"],
     });
     if (!product) {
-      throw boom.notFound('product not found');
+      throw boom.notFound("product not found");
     }
     return product;
   }
@@ -63,6 +62,9 @@ class ProductsService {
     return { id };
   }
 
+  async getByCategory(id) {
+    return await models.Product.findAll({ where: { categoryId: id } });
+  }
 }
 
 module.exports = ProductsService;

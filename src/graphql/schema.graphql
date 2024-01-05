@@ -4,6 +4,7 @@ type Query {
   #products
   product(id: ID!): Product
   products: [Product!]!
+  category(id: ID!): Category
 }
 
 type Mutation {
@@ -29,6 +30,7 @@ type Category {
   id: ID!
   name: String!
   urlImage: URL!
+  products: [Product!]!
 }
 
 input createProductInput {
